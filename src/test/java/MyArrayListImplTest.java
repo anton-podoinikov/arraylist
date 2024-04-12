@@ -89,5 +89,18 @@ public class MyArrayListImplTest {
         assertEquals(Integer.valueOf(3), iterator.next());
         assertFalse(iterator.hasNext());
     }
+
+    @Test
+    public void testAddAll() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        MyArrayListImpl<Integer> integers = new MyArrayListImpl<>();
+
+        integers.addAll(list);
+
+        assertEquals(3, integers.size());
+    }
 }
 

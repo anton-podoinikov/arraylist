@@ -119,6 +119,20 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         return values.length;
     }
 
+    /**
+     * Добавляет все элементы из указанного списка в конец текущего списка.
+     * @throws NullPointerException если переданный список равен null.
+     */
+    @Override
+    public void addAll(MyArrayList<E> other) {
+        if (other == null) {
+            throw new NullPointerException("The provided list cannot be null.");
+        }
+        for (E item : other) {
+            add(item);
+        }
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new MyIterator<>(values);
