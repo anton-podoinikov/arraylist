@@ -61,7 +61,19 @@ public class MyArrayListImplTest {
         assertNull(list.get(2));
     }
 
-    // Тест для метода sort требует отдельной реализации в зависимости от вашего алгоритма сортировки.
+    @Test
+    public void testSort() {
+        list.add(3);
+        list.add(2);
+        list.add(1);
+
+        list.sort();
+
+        assertEquals(Integer.valueOf(1), list.get(0));
+        assertEquals(Integer.valueOf(2), list.get(1));
+        assertEquals(Integer.valueOf(3), list.get(2));
+
+    }
 
     @Test
     public void testIterator() {
