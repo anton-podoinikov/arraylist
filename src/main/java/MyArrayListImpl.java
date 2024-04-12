@@ -1,10 +1,11 @@
 import java.util.Arrays;
 import java.util.Iterator;
 
-
 /**
- * MyArrayListImpl класс, который реализует часто используемые методы
- * класса ArrayList.
+ * Реализация списка с массивом переменной длины.
+ * Этот класс предоставляет реализацию методов для управления коллекцией,
+ * хранящей элементы в массиве. Класс позволяет добавлять, удалять, получать элементы,
+ * а также сортировать и очищать список.
  *
  * @param <E> тип элементов в массиве
  */
@@ -16,6 +17,14 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         values = (E[]) new Object[0];
     }
 
+    /**
+     * Добавляет элемент в конец списка.
+     * Элемент добавляется в конец текущего массива, при этом размер массива
+     * увеличивается на один.
+     *
+     * @param e элемент для добавления в список
+     * @return всегда возвращает true
+     */
     @Override
     public boolean add(E e) {
         E[] temp = values;
@@ -25,6 +34,13 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         return true;
     }
 
+    /**
+     * Вставляет указанный элемент в заданной позиции списка.
+     * Элементы, начиная с указанного индекса, сдвигаются вправо.
+     *
+     * @param index индекс, по которому нужно вставить элемент
+     * @param e элемент для вставки
+     */
     @Override
     public void add(int index, E e) {
         checkSize(index);
@@ -35,12 +51,24 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         System.arraycopy(temp, index, values, index + 1, temp.length - index);
     }
 
+    /**
+     * Возвращает элемент по указанному индексу.
+     *
+     * @param index индекс элемента для возврата
+     * @return элемент на указанном индексе
+     */
     @Override
     public E get(int index) {
         checkSize(index);
         return values[index];
     }
 
+    /**
+     * Удаляет элемент в указанной позиции.
+     * Элементы после указанной позиции сдвигаются влево.
+     *
+     * @param index индекс удаляемого элемента
+     */
     @Override
     public void remove(int index) {
         checkSize(index);
@@ -50,6 +78,9 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         System.arraycopy(temp, index + 1, values, index, temp.length - index - 1);
     }
 
+    /**
+     * Очищает список, устанавливая все его элементы в null.
+     */
     @Override
     public void clear() {
         for (int i = 0; i < values.length; i++) {
@@ -57,6 +88,10 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         }
     }
 
+    /**
+     * Сортирует список с использованием сортировки вставками.
+     * Список должен содержать элементы, реализующие интерфейс Comparable.
+     */
     @Override
     public void sort() {
         try {
@@ -74,6 +109,11 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         }
     }
 
+    /**
+     * Возвращает количество элементов в списке.
+     *
+     * @return количество элементов в списке
+     */
     @Override
     public int size() {
         return values.length;
@@ -84,16 +124,16 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
         return new MyIterator<>(values);
     }
 
-    private void checkSize(int index) {
-        if (index < 0 || index > values.length) {
-            throw new IndexOutOfBoundsException("Index " + index + ", Size: " + size());
-        }
-    }
-
     @Override
     public String toString() {
         return "MyArrayListImpl{" +
                 "values=" + Arrays.toString(values) +
                 '}';
+    }
+
+    private void checkSize(int index) {
+        if (index < 0 || index > values.length) {
+            throw new IndexOutOfBoundsException("Index " + index + ", Size: " + size());
+        }
     }
 }
